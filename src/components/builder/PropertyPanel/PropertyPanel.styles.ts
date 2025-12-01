@@ -1,0 +1,226 @@
+import styled from 'styled-components';
+
+export const PanelContainer = styled.aside`
+  width: 320px;
+  background: white;
+  border-left: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export const PanelHeader = styled.div`
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+`;
+
+export const PanelTitle = styled.h3`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const PanelSubtitle = styled.p`
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+`;
+
+export const PanelContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+`;
+
+export const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #94a3b8;
+  padding: 2rem;
+`;
+
+export const EmptyIcon = styled.div`
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  background: #f1f5f9;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+`;
+
+export const FieldGroup = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+export const FieldGroupTitle = styled.h4`
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+`;
+
+export const Field = styled.div`
+  margin-bottom: 1rem;
+`;
+
+export const Label = styled.label`
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+`;
+
+export const Textarea = styled.textarea`
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+`;
+
+export const ColorInput = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const ColorPicker = styled.input`
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: 6px;
+  }
+`;
+
+export const ToggleGroup = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  background: #f1f5f9;
+  padding: 0.25rem;
+  border-radius: 8px;
+`;
+
+export const ToggleButton = styled.button<{ $active: boolean }>`
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${({ $active }) => ($active ? 'white' : 'transparent')};
+  color: ${({ $active }) => ($active ? '#1a1a2e' : '#64748b')};
+  box-shadow: ${({ $active }) =>
+    $active ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none'};
+
+  &:hover {
+    color: #1a1a2e;
+  }
+`;
+
+export const CheckboxWrapper = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+`;
+
+export const Checkbox = styled.input`
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #667eea;
+`;
+
+export const CheckboxLabel = styled.span`
+  font-size: 0.875rem;
+  color: #374151;
+`;
+
+export const VisibilityGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const VisibilityItem = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: #64748b;
+`;
+

@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// Page Model - Stores landing page data
+// ============================================
+model Page {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  description String?
+  status      PageStatus @default(DRAFT)
+  layout      Json       // LayoutBlock[]
+  seo         Json?      // SEOConfig
+  settings    Json?      // PageSettings
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  publishedAt DateTime?
+
+  @@index([status])
+  @@index([slug])
+  @@map("pages")
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// ============================================
+// Media Model - Stores uploaded media files
+// ============================================
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  url          String
+  thumbnailUrl String?
+  mimeType     String
+  size         Int
+  folder       String?
+  width        Int?
+  height       Int?
+  createdAt    DateTime @default(now())
+
+  @@index([folder])
+  @@index([mimeType])
+  @@map("media")
+}
+
+// ============================================
+// Settings Model - Global site settings
+// ============================================
+model Settings {
+  id           String   @id @default("global")
+  seo          Json?    // GlobalSEO
+  branding     Json?    // BrandingConfig
+  navigation   Json?    // NavigationConfig
+  integrations Json?    // IntegrationsConfig
+  updatedAt    DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// ============================================
+// User Model - Admin users
+// ============================================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      UserRole @default(OPERATOR)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  OPERATOR
+}
+
+// ============================================
+// FormSubmission Model - Contact form submissions
+// ============================================
+model FormSubmission {
+  id        String   @id @default(cuid())
+  pageId    String?
+  formId    String
+  data      Json     // Form field values
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([pageId])
+  @@index([formId])
+  @@index([createdAt])
+  @@map("form_submissions")
+}
+
+// ============================================
+// Analytics Model - Page view analytics
+// ============================================
+model PageView {
+  id        String   @id @default(cuid())
+  pageId    String
+  sessionId String?
+  path      String
+  referrer  String?
+  userAgent String?
+  ip        String?
+  country   String?
+  city      String?
+  device    String?  // desktop, mobile, tablet
+  browser   String?
+  createdAt DateTime @default(now())
+
+  @@index([pageId])
+  @@index([createdAt])
+  @@index([path])
+  @@map("page_views")
+}
+

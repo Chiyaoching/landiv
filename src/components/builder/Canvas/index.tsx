@@ -1,15 +1,7 @@
 'use client';
 
 import React from 'react';
-import {
-  useDroppable,
-  useDraggable,
-  DndContext,
-  DragOverlay,
-  closestCenter,
-  DragEndEvent,
-  DragStartEvent,
-} from '@dnd-kit/core';
+import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -27,7 +19,7 @@ import {
 } from 'lucide-react';
 import { useBuilderStore } from '@/stores/builder';
 import { ComponentRenderer } from '@/components/ComponentRenderer';
-import { LayoutBlock, ComponentType } from '@/types';
+import { LayoutBlock } from '@/types';
 import * as S from './Canvas.styles';
 
 // Sortable block component
@@ -100,8 +92,6 @@ export const Canvas: React.FC = () => {
     setHoveredBlock,
     duplicateBlock,
     removeBlock,
-    reorderBlocks,
-    addBlock,
   } = useBuilderStore();
 
   const { setNodeRef, isOver } = useDroppable({
@@ -109,29 +99,6 @@ export const Canvas: React.FC = () => {
   });
 
   const sortedLayout = page?.layout.slice().sort((a, b) => a.order - b.order) || [];
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-
-    if (!over) return;
-
-    // Adding new component from sidebar
-    if (active.data.current?.isNew) {
-      const componentType = active.data.current.type as ComponentType;
-      addBlock(componentType);
-      return;
-    }
-
-    // Reordering existing blocks
-    if (active.id !== over.id) {
-      const oldIndex = sortedLayout.findIndex((b) => b.id === active.id);
-      const newIndex = sortedLayout.findIndex((b) => b.id === over.id);
-
-      if (oldIndex !== -1 && newIndex !== -1) {
-        reorderBlocks(oldIndex, newIndex);
-      }
-    }
-  };
 
   return (
     <S.CanvasContainer>

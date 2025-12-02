@@ -74,7 +74,7 @@ export const CanvasFrame = styled.div<{
 `;
 
 export const CanvasScroll = styled.div`
-  height: 100%;
+  min-height: 100%;
   overflow-y: auto;
 `;
 
@@ -82,9 +82,10 @@ export const DropZone = styled.div<{
   $isOver?: boolean;
   $isEmpty?: boolean;
 }>`
-  min-height: ${({ $isEmpty }) => ($isEmpty ? '400px' : 'auto')};
+  min-height: ${({ $isEmpty }) => ($isEmpty ? '500px' : '100%')};
   display: flex;
   flex-direction: column;
+  transition: background 0.2s ease;
   
   ${({ $isEmpty }) =>
     $isEmpty &&
@@ -96,7 +97,9 @@ export const DropZone = styled.div<{
   ${({ $isOver }) =>
     $isOver &&
     css`
-      background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+      background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+      outline: 2px dashed #667eea;
+      outline-offset: -4px;
     `}
 `;
 
